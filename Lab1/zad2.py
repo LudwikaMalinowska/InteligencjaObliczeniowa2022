@@ -117,13 +117,13 @@ def przedzial(x):
         return "[90, 100]"
 
 
-def discredit(v):
-    discredited = []
+def discrete(v):
+    discreted = []
     for x in v:
         discredited.append(przedzial(x))
 
-    print("Nowy wektor po dyskredytacji: ", discredited)
-    return discredited
+    print("Nowy wektor po dyskretyzacji: ", discredited)
+    return discreted
 
 
 v1 = [3, 8, 9, 10, 12]
@@ -156,6 +156,6 @@ standarized = standarize(random_vector)
 print(standarized)
 
 print("\n2h")
-discredited = discredit(random_vector)
-print(discredited)
+discreted = discrete(random_vector)
+print(discreted)
 
