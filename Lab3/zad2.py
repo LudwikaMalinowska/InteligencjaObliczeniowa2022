@@ -1,19 +1,13 @@
-import math
-
 import pygad
 import numpy
 import time
 import math
 
 
-# S = [1, 2, 3, 6, 10, 17, 25, 29, 30, 41, 51, 60, 70, 79, 80]
-A = [0.09, 0.06, 0.99, 0.98, 0.1, 0.15]
 
 
 #definiujemy parametry chromosomu
-#geny to liczby: 0 lub 1
-# gene_space = [0, 1]
-gene_space = {"low": 0, "high": 1, "step": 0.01}
+gene_space = {"low": 0, "high": 1}
 
 
 def endurance(x, y, z, u, v, w):
@@ -22,25 +16,20 @@ def endurance(x, y, z, u, v, w):
 
 #definiujemy funkcjÄ fitness
 def fitness_func(solution, solution_idx):
-    sum1 = endurance(*solution)
-    # solution_invert = 1 - solution
-    # sum2 = endurance(solution_invert)
-    # fitness = -numpy.abs(sum1-sum2)
-    #lub: fitness = 1.0 / (1.0 + numpy.abs(sum1-sum2))
-    return sum1
+    return endurance(*solution)
 
 fitness_function = fitness_func
 
 #ile chromsomĂłw w populacji
 #ile genow ma chromosom
 sol_per_pop = 20
-num_genes = len(A)
+num_genes = 6
 
 #ile wylaniamy rodzicow do "rozmanazania" (okolo 50% populacji)
 #ile pokolen
 #ilu rodzicow zachowac (kilka procent)
 num_parents_mating = 5
-num_generations = 30
+num_generations = 50
 keep_parents = 2
 
 #jaki typ selekcji rodzicow?
@@ -66,8 +55,7 @@ ga_instance = pygad.GA(gene_space=gene_space,
                        keep_parents=keep_parents,
                        crossover_type=crossover_type,
                        mutation_type=mutation_type,
-                       mutation_percent_genes=mutation_percent_genes,
-                       stop_criteria=["reach_0"]
+                       mutation_percent_genes=mutation_percent_genes
                        )
 
 start = time.time()
@@ -75,7 +63,7 @@ start = time.time()
 ga_instance.run()
 
 end = time.time()
-print(end - start)
+print("Czas: ", end - start)
 
 
 #podsumowanie: najlepsze znalezione rozwiazanie (chromosom+ocena)
