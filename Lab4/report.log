@@ -1,0 +1,10 @@
+2022-03-30 09:30:54,213 - pyswarms.single.global_best - INFO - Optimize for 100 iters with {'c1': 0.5, 'c2': 0.3, 'w': 0.9}
+2022-03-30 09:30:54,314 - pyswarms.single.global_best - INFO - Optimization finished | best cost: 1.4321038582640461e-07, best pos: [ 0.00012373 -0.00035763]
+2022-03-30 09:34:18,915 - pyswarms.single.global_best - INFO - Optimize for 100 iters with {'c1': 0.5, 'c2': 0.3, 'w': 0.9}
+2022-03-30 09:34:18,971 - pyswarms.single.global_best - INFO - Optimization finished | best cost: 3.8255772452779095e-07, best pos: [ 0.00049266 -0.00037396]
+2022-03-30 09:34:55,515 - pyswarms.single.global_best - INFO - Optimize for 100 iters with {'c1': 0.5, 'c2': 0.3, 'w': 0.9}
+2022-03-30 09:34:55,568 - pyswarms.single.global_best - INFO - Optimization finished | best cost: 3.9650901672074256e-08, best pos: [-0.00015827  0.00012084]
+2022-03-30 09:53:20,370 - pyswarms.single.global_best - INFO - Optimize for 50 iters with {'c1': 0.5, 'c2': 0.3, 'w': 0.9}
+2022-03-30 09:53:20,405 - pyswarms.single.global_best - INFO - Optimization finished | best cost: 4.883501916177312e-05, best pos: [-0.00118859 -0.00688638]
+2022-03-30 09:53:27,394 - matplotlib.animation - WARNING - MovieWriter imagemagick unavailable; using Pillow instead.
+2022-03-30 09:53:27,395 - matplotlib.animation - INFO - Animation.save using <class 'matplotlib.animation.PillowWriter'>
