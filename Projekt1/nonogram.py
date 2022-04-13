@@ -44,21 +44,62 @@ def check_row(row):
         elif length != 0 and gene == 0:
             rul.append(length)
             length = 0
+
+    if length != 0:
+        rul.append(length)
+
     return rul
+
+def check_column(column):
+    length = 0
+    rul = []
+    for gene in column:
+        if gene == 1:
+            length += 1
+        elif length != 0 and gene == 0:
+            rul.append(length)
+            length = 0
+
+    if length != 0:
+        rul.append(length)
+
+    return rul
+
+def get_columns(chunks):
+    columns = []
+    for i in range(len(chunks[0])):
+        col = []
+        for j in range(len(chunks)):
+            col.append(chunks[j][i])
+        columns.append(col)
+    # print("columns", columns)
+    return columns
+
 
 def fit(genes, solution_idx):
     reg_poz, reg_pion = curr_reg
     dl = len(reg_pion)
     szer = len(reg_poz)
     chunks = list(create_chunks(genes, szer))
-
+    columns = get_columns(chunks)
     points = 0
-    for i in range (len(chunks)):
-        row = chunks[i]
-        rul = check_row(row)
-        reg_i = reg_poz[i]
-        if rul == reg_i:
-            points += 5
+    for i in range(len(chunks)):
+        for j in range(len(columns)):
+            row = chunks[i]
+            column = columns[j]
+            rul_row = check_row(row)
+            rul_col = check_column(column)
+            reg_i = reg_poz[i]
+            reg_j = reg_pion[j]
+            if rul_row == reg_i and rul_col == reg_j:
+                points += 2
+
+    # for i in range(len(columns)):
+    #     column = columns[i]
+    #     rul = check_column(column)
+    #     reg_i = reg_pion[i]
+    #     if rul == reg_i:
+    #         points += 5
 
     return points
 
@@ -90,9 +131,12 @@ def run(reg):
     # podsumowanie: najlepsze znalezione rozwiazanie (chromosom+ocena)
     solution, solution_fitness, solution_idx = ga_instance.best_solution()
     chunks = list(create_chunks(solution, szer))
+    sum_chunks = list([sum(chunk) for chunk in chunks])
     print("Parameters of the best solution : {solution}".format(solution=chunks))
     print("Fitness value of the best solution = {solution_fitness}".format(solution_fitness=solution_fitness))
 
+    # wyswietlenie wykresu: jak zmieniala sie ocena na przestrzeni pokolen
+    ga_instance.plot_fitness()
 
 
 run(curr_reg)
