@@ -19,8 +19,8 @@ example_reg_pion = [[1], [5], [2], [5], [2,1], [2]]
 gene_space = [0,1]
 sol_per_pop = 1000
 num_parents_mating = 500
-num_generations = 100
-keep_parents = 50
+num_generations = 300
+keep_parents = 20
 # sol_per_pop = 10
 # num_parents_mating = 2
 # num_generations = 2
@@ -30,8 +30,8 @@ crossover_type = "single_point"
 mutation_type = "random"
 mutation_percent_genes = 4
 
-# curr_reg = [kot_reg_poz, kot_reg_pion]
-curr_reg = [example_reg_poz, example_reg_pion]
+curr_reg = [kot_reg_poz, kot_reg_pion]
+# curr_reg = [example_reg_poz, example_reg_pion]
 
 
 # Yields successive 'n' sized chunks from list 'list_name'
@@ -91,47 +91,18 @@ def fit(genes, solution_idx):
     # print(len(columns))
     points = 0
     for i in range(len(chunks)):
-        for j in range(len(columns)):
-            row = chunks[i]
-            column = columns[j]
-            rul_col = check_row(row)
-            rul_row = check_column(column)
+        row = chunks[i]
+        rul_row = check_row(row)
+        reg_i_row = reg_poz[i]
+        if rul_row == reg_i_row:
+            points += 1
 
-            reg_i_row = reg_poz[i]
-            reg_j_col = reg_pion[j]
-
-            if rul_row == reg_i_row and rul_col == reg_j_col:
-                # print(f"i: {i}, j: {j}, reg_row: {reg_i_row}, reg_col: {reg_j_col}")
-                points += 5
-            elif rul_row == reg_i_row or rul_col == reg_j_col:
-                points += 1
-            # elif (sum(rul_row) == sum(reg_i_row)) or (sum(rul_col) == sum(reg_j_col)):
-            #     points += 3
-            # else:
-            #     # try:
-            #         sum1row = sum(rul_row)
-            #         sum2row = sum(reg_i_row)
-            #
-            #         sum1col = sum(rul_col)
-            #         sum2col = sum(reg_j_col)
-            #
-            #         if (sum1row == sum2row) or (sum1col == sum2col):
-            #             points += 3
-
-                # except (TypeError):
-                #     print("err:", rul_col, reg_j_col)
-                #     # raise TypeError
-
-
-            # if (i == 0):
-            #     print(rul_col, reg_j_col)
-
-    # for i in range(len(columns)):
-    #     column = columns[i]
-    #     rul = check_column(column)
-    #     reg_i = reg_pion[i]
-    #     if rul == reg_i:
-    #         points += 5
+    for j in range(len(columns)):
+        column = columns[j]
+        rul_col = check_column(column)
+        reg_j_col = reg_pion[j]
+        if rul_col == reg_j_col:
+            points += 1
 
     return points
 
