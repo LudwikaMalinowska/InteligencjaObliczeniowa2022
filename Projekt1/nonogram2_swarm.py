@@ -7,13 +7,13 @@ import matplotlib.pyplot as plt
 
 
 
-kot_reg_poz = [[1,1], [3], [5], [5], [1,1], [1,1], [2,2], [3,1], [5]]
-kot_reg_pion = [ [2], [4], [8], [4,3], [2,2], [1], [3], [3], [0]]
+# kot_reg_poz = [[1,1], [3], [5], [5], [1,1], [1,1], [2,2], [3,1], [5]]
+# kot_reg_pion = [ [2], [4], [8], [4,3], [2,2], [1], [3], [3], [0]]
 
 example_reg_poz = [[2,1], [1,3], [1,2], [3], [4], [1]]
 example_reg_pion = [[1], [5], [2], [5], [2,1], [2]]
 
-curr_reg = [kot_reg_poz, kot_reg_pion]
+curr_reg = [example_reg_poz, example_reg_pion]
 
 
 
@@ -24,6 +24,10 @@ def create_chunks(list_name, n):
     for i in range(0, len(list_name), n):
         yield list_name[i:i + n]
 
+def print_sol(sol):
+    chunks = create_chunks(sol, len(curr_reg[0]))
+    for row in chunks:
+        print(row)
 
 def check_row(row):
     length = 0
@@ -58,9 +62,9 @@ def check_column(column):
 #działa
 def get_columns(chunks):
     columns = []
-    for i in range(len(chunks[0])):
+    for i in range(len(chunks)):
         col = []
-        for j in range(len(chunks)):
+        for j in range(len(chunks[0])):
             col.append(chunks[j][i])
         columns.append(col)
     # print("columns", columns)
@@ -68,39 +72,44 @@ def get_columns(chunks):
 
 
 def fit(genes):
+    # print("genes: ", genes)
     reg_poz, reg_pion = curr_reg
     dl = len(reg_poz)
     szer = len(reg_pion)
     chunks = list(create_chunks(genes, szer))
     columns = get_columns(chunks)
     # print(len(columns))
-    points = 0
+    points = 0.0
     for i in range(len(chunks)):
         row = chunks[i]
         rul_row = check_row(row)
         reg_i_row = reg_poz[i]
         if rul_row == reg_i_row:
-            points += 1
+            points += 1.0
 
     for j in range(len(columns)):
         column = columns[j]
         rul_col = check_column(column)
         reg_j_col = reg_pion[j]
         if rul_col == reg_j_col:
-            points += 1
+            points += 1.0
 
     return points
 
 
 def f(swarm):
-    return [fit(particle)
+    return [(-1) * fit(particle)
             for particle in swarm]
 
 options = {'c1': 0.5, 'c2': 0.3, 'w':0.9, 'k':2, 'p':1}
 
-optimizer = ps.discrete.BinaryPSO(n_particles=10, dimensions=15,
+n_genes = len(curr_reg[0]) * len(curr_reg[1])
+print(n_genes)
+optimizer = ps.discrete.BinaryPSO(n_particles=30, dimensions=n_genes,
 options=options)
-optimizer.optimize(f, iters=30, verbose=True)
+best_cost, best_pos = optimizer.optimize(f, iters=10000, verbose=True)
 cost_history = optimizer.cost_history
-plot_cost_history(cost_history)
-plt.show()
+# plot_cost_history(cost_history)
+# plt.show()
+
+print_sol(best_pos)
