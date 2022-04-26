@@ -1,6 +1,8 @@
 import pygad
 import numpy
 
+from Projekt1.image import plot
+
 kot_reg_poz = [[1,1], [3], [5], [5], [1,1], [1,1], [2,2], [3,1], [5]]
 kot_reg_pion = [ [2], [4], [8], [4,3], [2,2], [1], [3], [3]]
 
@@ -13,8 +15,13 @@ rabbit_reg_poz = [[2], [1,1], [3], [1,2], [8], [9], [9], [7], [3,3], [3,4]]
 rabbit_reg_pion = [[1,3,1], [3,2], [9], [1,7], [2,4,1], [4,1], [6],
                    [6], [4], [1]]
 
-example_reg_poz = [[2,1], [1,3], [1,2], [3], [4], [1]]
-example_reg_pion = [[1], [5], [2], [5], [2,1], [2]]
+pyramid_reg_poz = [[1], [2], [3], [4], [5], [6]]
+pyramid_reg_pion = [[6], [5], [4], [3], [2], [1]]
+
+# example_reg_poz = [[2,1], [1,3], [1,2], [3], [4], [1]]
+# example_reg_pion = [[1], [5], [2], [5], [2,1], [2]]
+
+max_points = len(pyramid_reg_poz) + len(pyramid_reg_pion)
 
 gene_space = [0,1]
 sol_per_pop = 1000
@@ -34,11 +41,24 @@ curr_reg = [kot_reg_poz, kot_reg_pion]
 # curr_reg = [example_reg_poz, example_reg_pion]
 
 
+
+
+
 # Yields successive 'n' sized chunks from list 'list_name'
 def create_chunks(list_name, n):
     for i in range(0, len(list_name), n):
         yield list_name[i:i + n]
 
+
+def get_columns(chunks):
+    columns = []
+    for i in range(len(chunks[0])):
+        col = []
+        for j in range(len(chunks)):
+            col.append(chunks[j][i])
+        columns.append(col)
+    # print("columns", columns)
+    return columns
 
 def check_row(row):
     length = 0
@@ -69,17 +89,6 @@ def check_column(column):
         rul.append(length)
 
     return rul
-
-#działa
-def get_columns(chunks):
-    columns = []
-    for i in range(len(chunks[0])):
-        col = []
-        for j in range(len(chunks)):
-            col.append(chunks[j][i])
-        columns.append(col)
-    # print("columns", columns)
-    return columns
 
 
 def fit(genes, solution_idx):
@@ -143,15 +152,8 @@ def run(reg):
     # wyswietlenie wykresu: jak zmieniala sie ocena na przestrzeni pokolen
     ga_instance.plot_fitness()
 
+    plot(chunks)
+
 
 run(curr_reg)
 
-c = [
-    [1,2,3,4,5,6],
-    [1,2,3,4,5,6],
-    [1,2,3,4,5,6]
-]
-
-# print(get_columns(c))
-
-# print(sum([5]))
