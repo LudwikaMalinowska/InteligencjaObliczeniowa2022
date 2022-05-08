@@ -1,4 +1,3 @@
-
 import pandas as pd
 import numpy as np
 import seaborn as sns
@@ -7,11 +6,11 @@ import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier
 
-df = pd.read_csv('iris.csv')
+df = pd.read_csv('diabetes.csv')
 
-
-# all_inputs = df[['SepalLengthCm', 'SepalWidthCm', 'PetalLengthCm', 'PetalWidthCm']].values
-all_inputs = df[['sepallength','sepalwidth','petallength','petalwidth']].values
+features = ['pregnant-times','glucose-concentr','blood-pressure',
+            'skin-thickness','insulin','mass-index','pedigree-func','age']
+all_inputs = df[features].values
 all_classes = df['class'].values
 
 (train_inputs, test_inputs, train_classes, test_classes) = \
