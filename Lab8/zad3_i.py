@@ -27,7 +27,7 @@ scaler.fit(train_data)
 train_data = scaler.transform(train_data)
 test_data = scaler.transform(test_data)
 
-print(train_data[:3])
+# print(train_data[:3])
 
 
 
@@ -39,19 +39,19 @@ from sklearn.preprocessing import OneHotEncoder
 # define example
 # data = train_labels
 values = array(train_labels)
-print(values)
+# print(values)
 # integer encode
 label_encoder = LabelEncoder()
 integer_encoded = label_encoder.fit_transform(values)
-print(integer_encoded)
+# print(integer_encoded)
 # binary encode
 onehot_encoder = OneHotEncoder(sparse=False)
 integer_encoded = integer_encoded.reshape(len(integer_encoded), 1)
 onehot_encoded = onehot_encoder.fit_transform(integer_encoded)
-print(onehot_encoded)
+# print(onehot_encoded)
 # invert first example
 inverted = label_encoder.inverse_transform([argmax(onehot_encoded[0, :])])
-print(inverted)
+# print(inverted)
 
 # Training the Model
 
@@ -70,21 +70,34 @@ mlp.fit(train_data, onehot_encoded)
 
 
 predictions_train = mlp.predict(train_data)
+print("train data accuracy: ")
 print(accuracy_score(predictions_train, onehot_encoded))
 
-print("predictions train")
-print(predictions_train)
+# print("predictions train")
+# print(predictions_train)
 print("Confusion matrix: ")
 print(confusion_matrix(onehot_encoded.argmax(axis=1), predictions_train.argmax(axis=1)))
 # matrix = multilabel_confusion_matrix(predictions_train, onehot_encoded)
 # print(matrix)
 
-#Todo
-# dla test labels też onehot encoding
 
 
-# print("f: ")
-# print("Ewaluacja na zbiorze testowym: ")
-# predictions_test = mlp.predict(test_data)
-# print(accuracy_score(predictions_test, test_labels))
-# print(classification_report(predictions_test, test_labels))
+print("Ewaluacja na zbiorze testowym: ")
+
+values = array(test_labels)
+label_encoder = LabelEncoder()
+integer_encoded = label_encoder.fit_transform(values)
+
+onehot_encoder = OneHotEncoder(sparse=False)
+integer_encoded = integer_encoded.reshape(len(integer_encoded), 1)
+onehot_encoded = onehot_encoder.fit_transform(integer_encoded)
+
+predictions_test = mlp.predict(test_data)
+print("test data accuracy: ")
+print(accuracy_score(predictions_test, onehot_encoded))
+
+# print("predictions test")
+# print(predictions_test)
+print("Confusion matrix: ")
+print(confusion_matrix(onehot_encoded.argmax(axis=1), predictions_test.argmax(axis=1)))
+
