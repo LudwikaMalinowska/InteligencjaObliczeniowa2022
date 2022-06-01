@@ -43,6 +43,13 @@ print("Tokenized Sentence:",tokenized_word)
 print("Filterd Sentence:",filtered_sent)
 
 
+#Lexicon Normalization
+#performing stemming and Lemmatization
+
+from nltk.stem.wordnet import WordNetLemmatizer
+lem = WordNetLemmatizer()
+
+
 
 print()
 print()
