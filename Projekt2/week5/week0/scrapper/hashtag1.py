@@ -7,7 +7,7 @@ tweets_list1 = []
 
 # tweets = sntwitter.TwitterHashtagScraper("johnnydepp")
 # since:2021-04-10 until:2022-04-11
-for i, tweet in enumerate(sntwitter.TwitterHashtagScraper("johnnydepp since:2021-04-10 until:2022-04-11 lang:en")
+for i, tweet in enumerate(sntwitter.TwitterHashtagScraper("johnnydepp since:2022-05-16 until:2022-05-23 lang:en")
                                   .get_items()):
     if i > 10000:  # number of tweets you want to scrape
         break
@@ -60,4 +60,4 @@ with open('hashtags_johnnydepp_pos.txt', 'w') as the_file_pos:
 
 print(pos_number)
 print(neg_number)
-
+print(len(tweets_list1))
