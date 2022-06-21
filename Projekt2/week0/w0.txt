@@ -1,0 +1,16 @@
+hasz1:
+neg: 4246
+pos: 2677
+
+hasz2:
+3131
+4829
+
+hasz 3:
+3806
+3424
+
+hasz 4: AmberHeardlsAnAbuser
+3099
+5001
+10001
