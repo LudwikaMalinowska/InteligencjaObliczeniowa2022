@@ -19,40 +19,22 @@ tokenized_word=word_tokenize(text)
 
 from nltk.probability import FreqDist
 fdist = FreqDist(tokenized_word)
-print(fdist.items())
 
-print(fdist.most_common(5))
 
 
 
 
 from nltk.corpus import stopwords
 stop_words=set(stopwords.words("english"))
-stop_words.add(".")
-stop_words.add(",")
-stop_words.add('"')
-stop_words.add("'")
-stop_words.add("'s")
-stop_words.add("``")
-stop_words.add("''")
-stop_words.add("#")
-stop_words.add("@")
-stop_words.add("!")
-stop_words.add("’")
-stop_words.add("?")
-stop_words.add(";")
-stop_words.add("amp")
-stop_words.add("&")
-stop_words.add("n't")
-# print(stop_words)
+
+from Projekt2.stop_words import stop_words as my_stop_words
+for word in my_stop_words:
+    stop_words.add(word)
 
 filtered_sent=[]
 for w in tokenized_word:
     if w.lower() not in stop_words:
         filtered_sent.append(w)
-print("Tokenized Sentence:",tokenized_word)
-print("Filterd Sentence:",filtered_sent)
-
 
 #Lexicon Normalization
 #performing stemming and Lemmatization
@@ -65,24 +47,18 @@ lem = WordNetLemmatizer()
 print()
 print()
 fdist = FreqDist(filtered_sent)
-print("Wektor słów:")
-print(fdist.items())
+
 
 print("10 most common words:")
-print(fdist.most_common(10))
-common10vector = fdist.most_common(10)
-labelsX = [x for (x, y) in common10vector]
-labelsY = [y for (x, y) in common10vector]
+print(fdist.most_common(30))
 
 
 
 # Frequency Distribution Plot
 import matplotlib.pyplot as plt
-fdist.plot(10,cumulative=False)
+fdist.plot(30,cumulative=False)
 plt.show()
 
-plt.bar(labelsX, labelsY)
-plt.show()
 
 
 

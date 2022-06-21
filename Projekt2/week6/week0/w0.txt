@@ -1,16 +1,18 @@
 hasz1:
-neg: 4246
-pos: 2677
+4746
+3163
+10001
 
 hasz2:
-3131
-4829
+3485
+4622
 
 hasz 3:
-3806
-3424
+4309
+3617
+10001
 
 hasz 4: AmberHeardlsAnAbuser
-neg: 3
-pos: 2
-total: 8
+3225
+4583
+10001

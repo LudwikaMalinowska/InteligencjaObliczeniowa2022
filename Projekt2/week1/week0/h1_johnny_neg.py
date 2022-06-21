@@ -9,12 +9,7 @@ content_list = my_file.readlines()
 content_list = filter(my_filter, content_list)
 text = " ".join(content_list)
 
-from nltk.sentiment.vader import SentimentIntensityAnalyzer
-sid = SentimentIntensityAnalyzer()
-ss = sid.polarity_scores(text)
-for k in sorted(ss):
-    print('{0}: {1}, '.format(k, ss[k]), end='')
-    print()
+
 
 from nltk.tokenize import sent_tokenize
 tokenized_text=sent_tokenize(text)

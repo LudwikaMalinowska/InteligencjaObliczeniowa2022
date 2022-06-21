@@ -6,7 +6,7 @@ import pandas as pd
 tweets_list1 = []
 
 
-for i, tweet in enumerate(sntwitter.TwitterHashtagScraper("AmberHeardlsAnAbuser since:2021-04-10 until:2022-04-11 lang:en")
+for i, tweet in enumerate(sntwitter.TwitterHashtagScraper("AmberHeardlsAnAbuser since:2022-05-23 until:2022-05-30 lang:en")
                                   .get_items()):
     if i > 10000:  # number of tweets you want to scrape
         break
